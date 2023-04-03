@@ -1,9 +1,47 @@
+import { useCallback } from "react";
 import { Empty } from "antd";
 
-import ProjectPreview from "./ProjectPreview";
+import ProjectDraggableRow from "./ProjectDraggableRow";
 import "../../css/ProjectList.css";
 
-const ProjectList = ({ deleteProjectAtIdx, editProjectAtIdx, projectList }) => {
+/**
+ * Handle the list: empty state for no items, and the linear list
+ */
+const ProjectList = ({
+    deleteProjectAtIdx,
+    editProjectAtIdx,
+    moveProjectRow,
+    projectList,
+}) => {
+    const renderProjectRow = useCallback(
+        (project, idx) => {
+            // Project-specific callbacks
+            const editProject = (name) => {
+                editProjectAtIdx(idx, project, name);
+            };
+            const deleteProject = () => {
+                deleteProjectAtIdx(idx, project);
+            };
+            return (
+                <ProjectDraggableRow
+                    key={project.id}
+                    canDrag={projectList.length > 1}
+                    currentIdx={idx}
+                    project={project}
+                    deleteProject={deleteProject}
+                    editProject={editProject}
+                    moveProjectRow={moveProjectRow}
+                />
+            );
+        },
+        [
+            editProjectAtIdx,
+            deleteProjectAtIdx,
+            moveProjectRow,
+            projectList.length,
+        ]
+    );
+
     if (!projectList.length) {
         return (
             <div className="content">
@@ -14,32 +52,14 @@ const ProjectList = ({ deleteProjectAtIdx, editProjectAtIdx, projectList }) => {
         );
     }
 
-    const projectItems = new Array(projectList.length);
-    // Build all the project rows, keep track of order in list for easy
-    // editing/deleting access
-    for (let i = 0; i < projectList.length; i++) {
-        // Project-specific callbacks
-        const project = projectList[i];
-        const editProject = (name) => {
-            editProjectAtIdx(i, project, name);
-        };
-        const deleteProject = () => {
-            deleteProjectAtIdx(i, project);
-        };
-
-        projectItems[i] = (
-            <ProjectPreview
-                project={project}
-                key={project.id}
-                deleteProject={deleteProject}
-                editProject={editProject}
-            />
-        );
-    }
-
+    // Build all the project rows, keep track of idx for reordering
     return (
         <div className="content">
-            <div className="projectList">{projectItems}</div>
+            <div className="projectList">
+                {projectList.map((project, idx) =>
+                    renderProjectRow(project, idx)
+                )}
+            </div>
         </div>
     );
 };

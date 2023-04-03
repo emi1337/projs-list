@@ -1,3 +1,17 @@
+.iconButtonContainer {
+    cursor: pointer;
+}
+
+/* Font-size should match iconButton's height/width */
+.iconFontButton {
+    color: #b2b2b2;
+    font-size: 24px;
+}
+
+.iconFontButton:hover {
+    color: #666666;
+}
+
 .iconButtonContainer,
 .iconButton {
     height: 24px;

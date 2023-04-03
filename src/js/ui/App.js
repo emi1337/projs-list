@@ -33,10 +33,10 @@ const App = () => {
 
     // Methods to update the project list. NOTE: make sure to be cloning
     // so that the state update gets correctly checked and things rerender.
+    // TODO: could add immutability-helper for better state handling!
     const saveNewProject = useCallback(
         (newProject) => {
-            const newProjectList = [newProject].concat(projectList);
-            setProjectList(newProjectList);
+            setProjectList([newProject].concat(projectList));
             setIsAddProjectShowing(false);
         },
         [projectList]
@@ -44,8 +44,9 @@ const App = () => {
 
     const editProjectAtIdx = useCallback(
         (atIdx, project, name) => {
-            projectList[atIdx].name = name;
-            setProjectList(projectList);
+            const newList = [...projectList];
+            newList[atIdx].name = name;
+            setProjectList(newList);
         },
         [projectList]
     );
@@ -60,10 +61,17 @@ const App = () => {
         [projectList]
     );
 
-    const reorderProjects = useCallback(
-        (fromIdx, toIdx) => {
-            console.log("from, to", fromIdx, toIdx);
-            console.log("projectList", projectList);
+    const moveProjectRow = useCallback(
+        (fromIndex, toIndex, projectID) => {
+            // First take out the item we're moving
+            let newList = [...projectList];
+            const movingItem = newList.splice(fromIndex, 1);
+            // Then combine [0:to] + movedItem + [to:last]
+            newList = newList
+                .slice(0, toIndex)
+                .concat(movingItem)
+                .concat(newList.slice(toIndex));
+            setProjectList(newList);
         },
         [projectList]
     );
@@ -83,8 +91,8 @@ const App = () => {
                 <ProjectList
                     deleteProjectAtIdx={deleteProjectAtIdx}
                     editProjectAtIdx={editProjectAtIdx}
+                    moveProjectRow={moveProjectRow}
                     projectList={projectList}
-                    reorderProjects={reorderProjects}
                 />
             </div>
         </div>
