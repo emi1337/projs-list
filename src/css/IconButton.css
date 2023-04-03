@@ -1,0 +1,17 @@
+.iconButtonContainer,
+.iconButton {
+    height: 24px;
+    width: 24px;
+}
+
+.iconButtonContainer .iconButtonHover {
+    display: none;
+}
+
+.iconButtonContainer:hover .iconButtonDefault {
+    display: none;
+}
+
+.iconButtonContainer:hover .iconButtonHover {
+    display: block;
+}

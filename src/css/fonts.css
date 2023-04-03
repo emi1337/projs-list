@@ -1,0 +1,8 @@
+@font-face {
+    font-family: "Larsseit-Regular";
+    src: url("../assets/fonts/Type+Dynamic+-+Larsseit-Regular.woff")
+        format("woff");
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+}

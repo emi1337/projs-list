@@ -1,0 +1,28 @@
+.headerFloatingCentered {
+    position: absolute;
+    right: 6em;
+    top: -30px; /** .floatingButton is 60, so to center, 60/2 == 30 */
+}
+
+.floatingButton {
+    align-items: center;
+    background-color: var(--primary-button);
+    border-radius: 30px;
+    display: flex;
+    filter: drop-shadow(0px 5px 2px var(--drop-shadow));
+    height: 60px;
+    justify-content: center;
+    position: relative;
+    width: 60px;
+}
+
+.floatingButton:hover {
+    background-color: var(--primary-button-hover);
+}
+
+.floatButtonLogo {
+    color: white;
+    height: 18px;
+    position: absolute;
+    width: 18px;
+}

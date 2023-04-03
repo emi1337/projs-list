@@ -1,0 +1,13 @@
+.projectNameSection {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+}
+
+.projectNameText {
+    font-size: 20px;
+    font-weight: 700;
+    margin-left: 1em;
+    margin-right: 1em;
+}

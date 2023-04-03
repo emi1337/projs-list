@@ -1,0 +1,19 @@
+.projectRow {
+    align-items: center;
+    background-color: var(--background-lightest);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+}
+
+.projectRowLeftSide {
+    align-items: center;
+    display: flex;
+}
+
+.projectImg {
+    height: 32px;
+    margin-right: 1em;
+    width: 32px;
+}
