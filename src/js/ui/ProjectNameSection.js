@@ -57,8 +57,10 @@ const ProjectNameSection = ({ project, onSave }) => {
             {nameSection}
             {!isEditingName && (
                 <IconButton
-                    iconForDefault={EditIcon}
-                    iconForHover={EditIconHover}
+                    iconsForSwitching={{
+                        iconForDefault: EditIcon,
+                        iconForHover: EditIconHover,
+                    }}
                     onClick={onClickEditName}
                 />
             )}

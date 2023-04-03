@@ -1,3 +1,8 @@
 .noProjectsList {
     margin-top: 2em;
 }
+
+/** Hide the row-being-dragged's original location */
+.projectBeingDragged {
+    opacity: 0;
+}

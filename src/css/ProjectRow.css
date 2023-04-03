@@ -7,6 +7,10 @@
     padding: 1em;
 }
 
+.projectRowDraggable {
+    cursor: move;
+}
+
 .projectRowLeftSide {
     align-items: center;
     display: flex;

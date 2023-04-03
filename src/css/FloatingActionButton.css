@@ -1,4 +1,5 @@
 .headerFloatingCentered {
+    cursor: pointer;
     position: absolute;
     right: 6em;
     top: -30px; /** .floatingButton is 60, so to center, 60/2 == 30 */

@@ -1,11 +1,8 @@
 import { useCallback } from "react";
+import { CloseOutlined } from "@ant-design/icons";
 
 import IconButton from "./components/IconButton";
 import ProjectRowLayout from "./components/ProjectRowLayout";
-
-// TODO: replace with X icons for canceling
-import DeleteIcon from "../../assets/imgs/DeleteIcon.svg";
-import DeleteIconHover from "../../assets/imgs/DeleteIcon_Hover.svg";
 
 const ProjectAddRow = ({ onCancel, saveNewProject }) => {
     // Parent's saveNewProject() handles the state changes, but we handle
@@ -32,8 +29,9 @@ const ProjectAddRow = ({ onCancel, saveNewProject }) => {
             saveProject={addNewProject}
             rightComponent={
                 <IconButton
-                    iconForDefault={DeleteIcon}
-                    iconForHover={DeleteIconHover}
+                    iconClassHandler={(classes) => (
+                        <CloseOutlined className={classes} />
+                    )}
                     onClick={onCancel}
                 />
             }

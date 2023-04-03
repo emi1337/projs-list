@@ -4,14 +4,20 @@ import { Modal } from "antd";
 
 import IconButton from "./components/IconButton";
 import ProjectRowLayout from "./components/ProjectRowLayout";
-
 import DeleteIcon from "../../assets/imgs/DeleteIcon.svg";
 import DeleteIconHover from "../../assets/imgs/DeleteIcon_Hover.svg";
 import "../../css/ProjectPreview.css";
 
 const { confirm } = Modal;
 
-const ProjectPreview = ({ project, deleteProject, editProject }) => {
+/**
+ * This is a glance at the project. In the future, we could click into these to
+ * view more data and take more actions on the project.
+ *
+ * NOTE: This is the layout and data of the project only.
+ * For draggable logic, see its parent, ProjectDraggableRow
+ */
+const ProjectPreview = ({ canDrag, deleteProject, editProject, project }) => {
     // This method opens an out-of-the-box modal view with these contents.
     // NOTE: This UI is slightly off-spec, but free from antd! And it looks nice :)
     const onClickDelete = () => {
@@ -35,7 +41,7 @@ const ProjectPreview = ({ project, deleteProject, editProject }) => {
     );
 
     return (
-        <>
+        <div className={canDrag ? "projectRowDraggable" : null}>
             <ProjectRowLayout
                 project={project}
                 saveProject={editProject}
@@ -46,13 +52,15 @@ const ProjectPreview = ({ project, deleteProject, editProject }) => {
                 }
                 rightComponent={
                     <IconButton
-                        iconForDefault={DeleteIcon}
-                        iconForHover={DeleteIconHover}
+                        iconsForSwitching={{
+                            iconForDefault: DeleteIcon,
+                            iconForHover: DeleteIconHover,
+                        }}
                         onClick={onClickDelete}
                     />
                 }
             />
-        </>
+        </div>
     );
 };
 
